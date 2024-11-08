@@ -1,3 +1,25 @@
+Skip to content
+Navigation Menu
+PresAndreichev
+/
+GithubActions
+
+Type / to search
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Settings
+Main Workflow
+Update blank.yml #17
+Jobs
+Run details
+Workflow file for this run
+.github/workflows/blank.yml at 507f149
 name: Main Workflow
 on: push
 env: 
@@ -46,6 +68,7 @@ jobs:
         run: snyk monitor
   Build:
     runs-on: ubuntu-latest
+    needs: [Snyk, Sonar-Cloud] 
     container: gradle:6-jdk11
     steps:
       - name: Clone down repository
@@ -76,6 +99,7 @@ jobs:
           DISABLE_ERRORS: true 
   Trivy:
     runs-on: ubuntu-latest
+    needs: [Docker-image]
     steps:
       - name: Install Trivy
         run: |
@@ -89,6 +113,7 @@ jobs:
         # replace "your_image_name" with the actual name of your image
   Tests:
     runs-on: ubuntu-latest
+    needs: Docker-image
     steps:
     - name: Download code
       uses: actions/download-artifact@v4
@@ -99,6 +124,7 @@ jobs:
       run: bash ci/component-test.sh
   Performance-test:
     runs-on: ubuntu-latest
+    needs: Docker-image
     steps:
     - name: Download code
       uses: actions/download-artifact@v4
@@ -127,6 +153,7 @@ jobs:
       run: bash ci/push-docker.sh
   Push-DockerHub:
     runs-on: ubuntu-latest
+    needs: [Trivy]
     steps:
       - name: Load Docker image
         run: docker load -i image.tar
@@ -141,3 +168,4 @@ jobs:
     
           
       
+Update blank.yml · PresAndreichev/GithubActions@507f149
