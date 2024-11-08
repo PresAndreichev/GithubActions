@@ -1,25 +1,3 @@
-Skip to content
-Navigation Menu
-PresAndreichev
-/
-GithubActions
-
-Type / to search
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-Main Workflow
-Update blank.yml #17
-Jobs
-Run details
-Workflow file for this run
-.github/workflows/blank.yml at 507f149
 name: Main Workflow
 on: push
 env: 
