@@ -6,8 +6,8 @@ env:
   GIT_COMMIT: ${{github.sha}}
 jobs:
   Sonar-Cloud:
-   runs-on: ubuntu-latest
-   steps:
+    runs-on: ubuntu-latest
+    steps:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Set up JDK 11
@@ -15,16 +15,17 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
+      - name: Build the project
+        run: |
+          ./gradlew build
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2
+        uses: SonarSource/sonarcloud-github-action@v2  # Stable release
         with:
           args: >
-            -Dsonar.projectKey=SONAR_TOKEN
+            -Dsonar.projectKey=${{ secrets.SONAR_TOKEN }}
             -Dsonar.organization=presandreichev
-            -Dsonar.exclusions=**/*.java
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} 
- 
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   Snyk:
     runs-on: ubuntu-latest
     steps:
