@@ -28,7 +28,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Set up Snyk
-        uses: snyk/actions/setup@v2
+        uses: snyk/setup-snyk@v2
         with:
           version: 'latest'
       - name: Run Snyk to check for vulnerabilities
