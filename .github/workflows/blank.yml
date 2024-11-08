@@ -76,7 +76,6 @@ jobs:
           DISABLE_ERRORS: true 
   Trivy:
     runs-on: ubuntu-latest
-    needs: [Docker-image]
     steps:
       - name: Install Trivy
         run: |
@@ -90,7 +89,6 @@ jobs:
         # replace "your_image_name" with the actual name of your image
   Tests:
     runs-on: ubuntu-latest
-    needs: Docker-image
     steps:
     - name: Download code
       uses: actions/download-artifact@v4
@@ -101,7 +99,6 @@ jobs:
       run: bash ci/component-test.sh
   Performance-test:
     runs-on: ubuntu-latest
-    needs: Docker-image
     steps:
     - name: Download code
       uses: actions/download-artifact@v4
@@ -130,7 +127,6 @@ jobs:
       run: bash ci/push-docker.sh
   Push-DockerHub:
     runs-on: ubuntu-latest
-    needs: [Trivy]
     steps:
       - name: Load Docker image
         run: docker load -i image.tar
