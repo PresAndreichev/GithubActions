@@ -46,7 +46,6 @@ jobs:
         run: snyk monitor
   Build:
     runs-on: ubuntu-latest
-    needs: [Snyk, Sonar-Cloud] 
     container: gradle:6-jdk11
     steps:
       - name: Clone down repository
