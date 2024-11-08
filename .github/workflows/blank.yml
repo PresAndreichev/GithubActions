@@ -5,7 +5,7 @@ env:
   docker_password: ${{secrets.GITHUB_TOKEN}}
   GIT_COMMIT: ${{github.sha}}
 jobs:
-  Sonarcloud:
+  Sonar-cloud:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
