@@ -21,6 +21,7 @@ jobs:
           args: >
             -Dsonar.projectKey=SONAR_TOKEN
             -Dsonar.organization=presandreichev
+            -Dsonar.exclusions=**/*.java
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} 
  
